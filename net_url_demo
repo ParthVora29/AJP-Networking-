@@ -1,0 +1,48 @@
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Date;
+
+public class tc2_url_demo {
+    
+    public static void main(String args[]){
+    
+           try{               
+            URL ur = new URL("http://www.javatpoint.com/multithreading-in-java"); 
+            System.out.println("Protocol:"+ur.getProtocol());
+            System.out.println("Hostname:"+ur.getHost());
+            System.out.println("Port:"+ur.getPort());
+            System.out.println("FileName:"+ur.getFile());
+            System.out.println("Path"+ur.getPath());
+            System.out.println("External Form"+ur.toExternalForm());
+            
+            System.out.println("-------URL CONNECTION O/P-------");
+            URLConnection urc=ur.openConnection();
+            
+            //System.out.println("Content length:"+urc.getContentLength());
+            System.out.println("Content Type:"+urc.getContentType());
+            System.out.println("Expiration Date"+urc.getExpiration());
+            System.out.println("Last Modified Date:"+urc.getLastModified());
+            System.out.println("Date:"+new Date(urc.getDate()));
+            
+            int l = urc.getContentLength();
+		System.out.println("Length of content: "+ l);
+		if(l == 0)
+		{
+			System.out.println("Content not available");
+			return;
+		}
+		else {
+			int ch;
+			InputStream in = urc.getInputStream();
+			//display the content of the index.html page
+			while((ch = in.read())!= -1)
+			System.out.print((char)ch);
+		}
+
+           }catch(Exception e){System.out.println(e);}
+    
+    }
+    
+    
+}
